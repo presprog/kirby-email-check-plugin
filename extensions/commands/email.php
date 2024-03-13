@@ -17,16 +17,16 @@ return [
             'description' => 'The recipient address',
         ],
         'subject' => [
-            'prefix'      => 's',
-            'longPrefix'  => 'subject',
-            'description' => 'The message subject',
-            'default'     => '🎉 Your configured Kirby transport is working!'
+            'prefix'       => 's',
+            'longPrefix'   => 'subject',
+            'description'  => 'The message subject',
+            'defaultValue' => '🎉 Your configured email transport is working!'
         ],
         'body' => [
-            'prefix'      => 'b',
-            'longPrefix'  => 'body',
-            'description' => 'The message body',
-            'default'     => "Congratulations, your configured Kirby transport is working.\n\nNow go send some emails 🚀",
+            'prefix'       => 'b',
+            'longPrefix'   => 'body',
+            'description'  => 'The message body',
+            'defaultValue' => "Congratulations, your configured email transport is working.\n\nNow go send some emails 🚀",
         ],
         'preset' => [
             'prefix'      => 'p',
@@ -38,8 +38,10 @@ return [
         $kirby = $cli->kirby();
 
         $props = [
-            'from' => $cli->argOrPrompt('from', 'Please enter the sender address:'),
-            'to'   => $cli->argOrPrompt('to', 'Please enter the recipient address:'),
+            'from'    => $cli->argOrPrompt('from', 'Please enter the sender address:'),
+            'to'      => $cli->argOrPrompt('to', 'Please enter the recipient address:'),
+            'subject' => $cli->arg('subject'),
+            'body'    => $cli->arg('body'),
         ];
 
         $preset = $cli->arg('preset');
