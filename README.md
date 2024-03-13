@@ -1,42 +1,25 @@
-# My Kirby plugin readme
+# Easily check your email transport configuration with one simple command
 
-----
-
-> [!NOTE]
-> Delete this section after you are done.
-
-This is our boilerplate for Kirby plugins. Create a project from this repository to create a new plugin and adjust the files accordingly:
+You just set up the new server and deployed your Kirby application and would like to check whether your application is ready to send emails? Just run one simple command from the CLI and get a detailed log of what is happening (or not).
 
 ```bash
-# Adjust `my-new-kirby-plugin` to whatever you want to name the output folder
-composer create-project presprog/kirby-skeleton-plugin my-new-kirby-plugin
+$ kirby email --from me@example.org --to also-me@example.org
+# … (SMTP debugging output)
+$ Your email was sent successfully!
 ```
-1. Update the `README.md`
-* Update the package name in the badges
-* Write a proper readme for your plugin
-2. Update `composer.json`:
-* Update the package name
-* Update the PSR-4 namespace
-* Update the installer name (or remove entirely)
-3. Set the package name in `index.php`
-4. Set the package name in `panel/index.js`
-5. Add [badges](https://poser.pugx.org/), if you like
-
-----
-
-## What does this plugin do?
-
-…
 
 ## Installation
 
 Install this plugin via **Composer**:
 
 ```bash
-composer require presprog/my-kirby-plugin
+composer require presprog/kirby-email-check-plugin
 ```
 
-Or **download the ZIP file** from Github and unpack it to `site/plugins/my-kirby-plugin`
+Or **download the ZIP file** from GitHub and unpack it to `site/plugins/email-check`
+
+## Requirements
+This plugin required the Kirby CLI to be installed. It will not be installed automatically, though. Please follow [their installation guide](https://getkirby.com/plugins/getkirby/cli).
 
 ## License
 

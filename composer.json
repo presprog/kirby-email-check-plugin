@@ -1,5 +1,5 @@
 {
-  "name": "presprog/my-kirby-plugin",
+  "name": "presprog/kirby-email-check-plugin",
   "description": "Describe your plugin here",
   "license": "MIT",
   "type": "kirby-plugin",
@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "PresProg\\MyPlugin\\": "classes/"
+      "PresProg\\EmailCheck\\": "classes/"
     }
   },
   "config": {
@@ -25,7 +25,7 @@
     "optimize-autoloader": true
   },
   "extra": {
-    "installer-name": "my-plugin"
+    "installer-name": "email-check"
   },
     "scripts": {
         "csfix": "@php tools/phpcs/vendor/bin/php-cs-fixer fix"
