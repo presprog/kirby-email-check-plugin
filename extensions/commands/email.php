@@ -44,7 +44,7 @@ return [
             'body'    => $cli->arg('body'),
         ];
 
-        $preset = $cli->arg('preset');
+        $preset = $cli->arg('preset') !== '' ?: null;
 
         if ($preset) {
             $cli->climate()->out(sprintf('Using preset: %s', $preset));
@@ -54,7 +54,8 @@ return [
             $props['transport'] = $transport;
         }
 
-        $props['beforeSend'] = function (PHPMailer $mailer) use ($cli) {
+        // TODO: Also run `beforeSend` from local config
+        $props['beforeSend'] = function (PHPMailer $mailer) {
             $mailer->SMTPDebug = 3;
             $mailer->Timeout   = 15;
         };
