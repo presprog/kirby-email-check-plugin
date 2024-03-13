@@ -1,0 +1,7 @@
+# Git
+.gitattributes export-ignore
+.gitignore export-ignore
+
+# Plugin
+.github export-ignore
+tools export-ignore
