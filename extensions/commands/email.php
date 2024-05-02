@@ -50,8 +50,8 @@ return [
             $cli->climate()->out(sprintf('Using preset: %s', $preset));
         }
 
-        // This requires the transport configuration to be defined in the global config,
-        // but it could have been defined in an environment config file.
+        // Since we are on the command-line, we may not get the right transport here,
+        // because host-based config files may not be loaded
         // TODO: Load transport from environment config files
         if ($transport = $kirby->option('email.transport')) {
             $props['transport'] = $transport;
