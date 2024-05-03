@@ -28,19 +28,8 @@ return [
             'description'  => 'The message body',
             'defaultValue' => "Congratulations, your configured email transport is working.\n\nNow go send some emails 🚀",
         ],
-        'preset' => [
-            'prefix'      => 'p',
-            'longPrefix'  => 'preset',
-            'description' => 'The email preset',
-        ],
     ],
     'command' => function (CLI $cli) {
-        $preset = $cli->arg('preset') !== '' ?: null;
-
-        if ($preset) {
-            $cli->climate()->out(sprintf('Using preset: %s', $preset));
-        }
-
         $props = [
             'from'    => $cli->argOrPrompt('from', 'Please enter the sender address:'),
             'to'      => $cli->argOrPrompt('to', 'Please enter the recipient address:'),
@@ -64,8 +53,7 @@ return [
         };
 
         try {
-            // $props will overwrite props from $preset in Kirby email function
-            $kirby->email($preset ?? [], $props);
+            $kirby->email($props);
             $cli->climate()->success('Email sent successfully');
         } catch (Exception $exception) {
             $cli->climate()->info('There was an error sending your email');
