@@ -7,7 +7,7 @@
 You just set up the new server and deployed your Kirby application and would like to check whether your application is ready to send emails? Just run one simple command from the CLI and get a detailed log of what is happening (or not).
 
 > [!IMPORTANT]
-> Requires at least Kirby 4.0 and PHP 8.2
+> Requires at least Kirby 4.0 and PHP 8.0
 
 ## 🚀 How to use
 
