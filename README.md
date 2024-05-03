@@ -1,6 +1,17 @@
+![Kirby Email Check Plugin](/.github/banner.png)
+
 # Easily check your email transport configuration with one simple command
 
+> ⚡ Ready for Kirby 4!
+
 You just set up the new server and deployed your Kirby application and would like to check whether your application is ready to send emails? Just run one simple command from the CLI and get a detailed log of what is happening (or not).
+
+> [!IMPORTANT]
+> Requires at least Kirby 4.0 and PHP 8.2
+
+## 🚀 How to use
+
+Just run this command from the terminal:
 
 ```bash
 $ kirby email --from me@example.org --to also-me@example.org
@@ -8,7 +19,20 @@ $ kirby email --from me@example.org --to also-me@example.org
 $ Your email was sent successfully!
 ```
 
-## Installation
+## ⚙️ Config
+
+Every argument has to be passed to the command:
+
+| argument | description                 |
+|----------|-----------------------------|
+| from*    | The sender email address    |
+| to*      | The recipient email address |
+| subject  | The email subject           |
+| body     | The email body              |
+
+\* required arguments
+
+## 💻 How to install
 
 Install this plugin via **Composer**:
 
@@ -18,9 +42,12 @@ composer require presprog/kirby-email-check-plugin
 
 Or **download the ZIP file** from GitHub and unpack it to `site/plugins/email-check`
 
-## Limitations
+> [!IMPORTANT]
+> This plugin requires the Kirby CLI to be installed. It will not be installed automatically, though. Please follow [their installation guide](https://getkirby.com/plugins/getkirby/cli).
 
-If you have defined your email transport in a per-host config file (e.g. `config.example.com.php`) you MUST define the base URL for your current environment in `env.php`. Follow the guide to set this up.
+## 🧱 Current limitations
+
+The Kirby CLI is not aware of your current environment: it loads the host-based config files (e.g. `config.example.org.php`) depending on the current domain. On the CLI there is no such thing. In order to correctly load the right transport settings, you must use Kirbys `env.php` to tell the system, which URL is currently in use. [Follow the guide](https://getkirby.com/docs/guide/configuration#multi-environment-setup__deployment-configuration) to set this up.
 
 ```php
 // in /site/config/env.php
@@ -30,54 +57,16 @@ return [
 ];
 ```
 
-Without this definition, Kirby derives the hostname from the domain name the website has been requested with. On the CLI there is no such thing, which is why Kirby cannot resolve for the right per-host config file and your transport configuration will not be loaded in this case.
+## ✅ To do
+* [ ] Handle presets
+* [ ] Improve host-based config file handling
 
-Another way is to define your email transport in the global `config.php`. Since your transport config will likely differ between your local, staging and production environment, you would have to resolve the right values otherwise, e.g. with a `.env` file:
-
-```php
-// in /site/config/config.php
-$transport = [
-    'type' => 'mail',
-];
-
-if (env('MAILER_HOST') && env('MAILER_PORT')) {
-    $transport = [
-        'type' => 'smtp',
-        'host' => env('MAILER_HOST'),
-        'port' => env('MAILER_PORT'),
-        'security' => env('MAILER_SECURITY') ?? false,
-    ];
-
-    if (env('MAILER_USERNAME') && env('MAILER_PASSWORD')) {
-        $transport['email']['transport']['auth']     = true;
-        $transport['email']['transport']['username'] = env('MAILER_USERNAME');
-        $transport['email']['transport']['password'] = env('MAILER_PASSWORD');
-    }
-}
-
-return [
-    'email' => [
-        'transport' => $transport,
-    ],
-];
-```
-
-```dotenv
-# in /.env
-MAILER_HOST=smtp.example.com
-MAILER_PORT=587
-MAILER_SECURITY=tls
-```
-
-## Requirements
-This plugin required the Kirby CLI to be installed. It will not be installed automatically, though. Please follow [their installation guide](https://getkirby.com/plugins/getkirby/cli).
-
-## License
+## 📄 License
 
 MIT License Copyright © 2024 Present Progressive
 
 ----
 
-<img src="/logo.svg?raw=true" width="200" height="43">
+<img src="/.github/logo.svg?raw=true" width="200" height="43">
 
 Made by [Present Progressive](https://www.presentprogressive.de) for the Kirby community.
