@@ -35,7 +35,11 @@ return [
         ],
     ],
     'command' => function (CLI $cli) {
-        $kirby = $cli->kirby();
+        $preset = $cli->arg('preset') !== '' ?: null;
+
+        if ($preset) {
+            $cli->climate()->out(sprintf('Using preset: %s', $preset));
+        }
 
         $props = [
             'from'    => $cli->argOrPrompt('from', 'Please enter the sender address:'),
@@ -44,11 +48,7 @@ return [
             'body'    => $cli->arg('body'),
         ];
 
-        $preset = $cli->arg('preset') !== '' ?: null;
-
-        if ($preset) {
-            $cli->climate()->out(sprintf('Using preset: %s', $preset));
-        }
+        $kirby = $cli->kirby();
 
         // Since we are on the command-line, we may not get the right transport here,
         // because host-based config files may not be loaded
@@ -64,6 +64,7 @@ return [
         };
 
         try {
+            // $props will overwrite props from $preset in Kirby email function
             $kirby->email($preset ?? [], $props);
             $cli->climate()->success('Email sent successfully');
         } catch (Exception $exception) {
